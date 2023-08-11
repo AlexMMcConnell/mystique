@@ -43,11 +43,6 @@ export default class Generate extends Command {
             this.exit
             return [false, flags]
         }
-
-        if (!this.validateSection(flags.section, this.eventConfig(flags.env, platform))) {
-            this.exit
-            return [false, flags]
-        }
         return[true, flags]
     }
 
@@ -62,14 +57,5 @@ export default class Generate extends Command {
     validateDate(date: string): boolean {
         const validDate = moment(date, 'MM/DD/YYYY')
         return validDate.isValid()
-    }
-
-    validateSection(section: string, config: Record<string, any>): [boolean, Record<string, any>] {
-        const validSection = config.sections // search sections for where 'section xid' = 'section'
-        if (!validSection) {
-            console.log('Invalid section XID - please use a valid section XID.')
-            return [false, validSection]
-        }
-        return [true, validSection]
     }
 }
